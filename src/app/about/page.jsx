@@ -36,15 +36,20 @@ const About = () => {
         </div>
         <div className={styles.item}>
           <h1 className={styles.title}>Who We Do</h1>
-          <p>
+          <p className={styles.desc}>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel enim
             nulla officia recusandae pariatur laborum quaerat consequatur
             quibusdam fugiat aliquid hic blanditiis fuga nemo
             <br />
             <br />
-            corporis, molestias fugit doloremque deleniti error!
+            - Dynamic Websites
+            <br />
+            <br />- Fast and Handy
+            <br />
+            <br />- Mobile Apps
           </p>
-          <Button url='/contact' text="contact" />
+
+          <Button url="/contact" text="contact" />
         </div>
       </div>
     </div>
