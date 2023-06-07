@@ -3,75 +3,41 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Blog = () => {
+async function getData() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+const Blog = async () => {
+  const data = await getData();
+
   return (
     <div className={styles.mainContainer}>
-      <Link href="/blog/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/deer.jpg"
-            alt=""
-            width={250}
-            height={200}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit, amet consectetur
-          </h1>
-          <p className={styles.desc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias,
-            delectus?Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Molestias, delectus?Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Molestias, delectus?
-          </p>
-        </div>
-      </Link>
-      <Link href="/blog/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/lamb.jpg"
-            alt=""
-            width={250}
-            height={200}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit, amet consectetur
-          </h1>
-          <p className={styles.desc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias,
-            delectus?Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Molestias, delectus?Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Molestias, delectus?
-          </p>
-        </div>
-      </Link>
-      <Link href="/blog/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/parrot.jpg"
-            alt=""
-            width={250}
-            height={200}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit, amet consectetur
-          </h1>
-          <p className={styles.desc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias,
-            delectus?Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Molestias, delectus?Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Molestias, delectus?
-          </p>
-        </div>
-      </Link>
+      {data.map((item) => (
+        <Link href="/blog/testId" className={styles.container} key={item.id}>
+          <div className={styles.imageContainer}>
+            <Image
+              src="/deer.jpg"
+              alt=""
+              width={250}
+              height={200}
+              className={styles.image}
+            />
+          </div>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{item.title}</h1>
+            <p className={styles.desc}>{item.body}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };
