@@ -6,8 +6,9 @@ import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 
 const Register = () => {
-  const router = useRouter();
   const [err, setErr] = useState(false);
+  
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +29,8 @@ const Register = () => {
         }),
       });
 
-      res.status === 201 && router.push('/dashboard/login?success=Account has been created');
+      res.status === 201 &&
+        router.push('/dashboard/login?success=Account has been created');
     } catch (err) {
       setErr(true);
     }
@@ -36,16 +38,27 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input type="text" placeholder="username" className={styles.input} />
-        <input type="email" placeholder="email" className={styles.input} />
+        <input
+          type="text"
+          placeholder="username"
+          className={styles.input}
+          required
+        />
+        <input
+          type="email"
+          placeholder="email"
+          className={styles.input}
+          required
+        />
         <input
           type="password"
           placeholder="password"
           className={styles.input}
+          required
         />
         <button className={styles.button}>Register</button>
       </form>
-      {err && 'something went wrong'}
+      {err && 'something went wrong!'}
       <Link href="/dashboard/login">Login with an existing account</Link>
     </div>
   );
