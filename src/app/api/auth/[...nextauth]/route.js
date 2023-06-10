@@ -12,7 +12,7 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      id: 'Credentials',
+      id: 'credentials',
       name: 'Credentials',
       async authorize(credentials) {
         //check if the user exists.
