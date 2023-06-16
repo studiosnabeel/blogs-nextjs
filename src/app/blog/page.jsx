@@ -14,7 +14,7 @@ async function getData() {
   return res.json();
 }
 
-const Blog = async () => {
+export default async function Blog () {
   const data = await getData();
   return (
     <div className={styles.mainContainer}>
@@ -43,4 +43,4 @@ const Blog = async () => {
   );
 };
 
-export default Blog;
+// export default Blog;
